@@ -1,0 +1,40 @@
+{
+  "name": "imagic-browser-launcher",
+  "version": "1.0.0",
+  "description": "Lib for launch browsers",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iMagicKey/browser-launcher.git"
+  },
+  "keywords": [
+    "browser",
+    "launch",
+    "browser-launcher"
+  ],
+  "author": "iMagicKey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iMagicKey/browser-launcher/issues"
+  },
+  "homepage": "https://github.com/iMagicKey/browser-launcher#readme",
+  "directories": {
+    "example": "examples"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^10.0.2",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.2.3",
+    "prettier": "^3.5.2"
+  }
+}

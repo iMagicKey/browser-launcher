@@ -1,0 +1,32 @@
+{
+    "root": true,
+    "extends": ["eslint:recommended"],
+    "rules": {
+        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "semi": "off",
+        "no-unused-vars": "warn",
+        "no-console": "off",
+        "import/extensions": "off",
+    },
+    "env": {
+        "es6": true,
+    },
+    "overrides": [
+        {
+            "files": ["src/**/*.{js,jsx}", "examples"],
+            "extends": ["airbnb", "eslint-config-airbnb-base", "prettier"],
+            "rules": {
+                "prettier/prettier": ["error"],
+                "max-len": ["error", { "code": 150 }],
+            },
+            "parserOptions": {
+                "ecmaVersion": 2022,
+            },
+            "env": {
+                "es6": true,
+                "node": true,
+            },
+            "plugins": ["prettier", "node"],
+        },
+    ],
+}
