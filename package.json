@@ -1,13 +1,17 @@
 {
   "name": "imagic-browser-launcher",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Launch and control Chromium browser instances",
   "type": "module",
   "exports": {
     ".": "./src/index.js",
     "./package.json": "./package.json"
   },
-  "files": ["src", "README.md", "LICENSE"],
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
   "sideEffects": false,
   "scripts": {
     "test": "node --test ./tests/**/*.test.js",
