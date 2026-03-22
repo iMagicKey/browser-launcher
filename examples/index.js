@@ -6,6 +6,7 @@ const browserPath = `${resolve()}/browser/chrome`
 const browser = new Launcher({
     browserPath,
     port: 9223,
+    url: 'https://example.com',
     flags: [
         '--headless=new',
         '--no-sandbox',
@@ -25,10 +26,11 @@ const browser = new Launcher({
     debug: true,
 })
 
+// Signal handling is managed internally by the Launcher instance.
+// kill() removes all registered signal listeners automatically.
+// You can still add your own cleanup logic here if needed.
 process.on('exit', () => {
-    if (browser.process) {
-        browser.kill()
-    }
+    browser.kill()
 })
 
 browser

@@ -1,5 +1,3 @@
-/* eslint-disable no-await-in-loop */
-/* eslint-disable no-underscore-dangle */
 import { spawn } from 'child_process'
 import fs from 'fs'
 import * as net from 'net'
@@ -19,6 +17,10 @@ export default class Launcher {
 
         this._debuggerReady = false
         this._isLaunching = false
+
+        this._sigintHandler = null
+        this._sigtermHandler = null
+        this._exitHandler = null
     }
 
     getFlags() {
@@ -47,11 +49,13 @@ export default class Launcher {
             finalFlags.add(flag)
         }
 
-        if (this.url && !this.url.startsWith('--')) {
-            finalFlags.add(this.url)
+        const args = Array.from(finalFlags)
+
+        if (this.url) {
+            args.push(this.url)
         }
 
-        return Array.from(finalFlags)
+        return args
     }
 
     log(...args) {
@@ -87,13 +91,30 @@ export default class Launcher {
                 stdio: 'ignore',
             })
 
-            const cleanupHandler = () => {
+            // Remove any previously registered signal handlers before adding new ones
+            if (this._sigintHandler) {
+                process.removeListener('SIGINT', this._sigintHandler)
+            }
+            if (this._sigtermHandler) {
+                process.removeListener('SIGTERM', this._sigtermHandler)
+            }
+            if (this._exitHandler) {
+                process.removeListener('exit', this._exitHandler)
+            }
+
+            this._sigintHandler = () => {
                 this.kill()
                 process.exit()
             }
-            process.once('SIGINT', cleanupHandler)
-            process.once('SIGTERM', cleanupHandler)
-            process.once('exit', () => this.kill())
+            this._sigtermHandler = () => {
+                this.kill()
+                process.exit()
+            }
+            this._exitHandler = () => this.kill()
+
+            process.once('SIGINT', this._sigintHandler)
+            process.once('SIGTERM', this._sigtermHandler)
+            process.once('exit', this._exitHandler)
 
             this.process.once('exit', (code, signal) => {
                 if (!this._debuggerReady) {
@@ -156,7 +177,7 @@ export default class Launcher {
                         client.end()
                         client.destroy()
                     }
-                } catch (e) {
+                } catch {
                     // Ignore cleanup errors
                 }
             }
@@ -192,6 +213,19 @@ export default class Launcher {
     }
 
     kill() {
+        if (this._sigintHandler) {
+            process.removeListener('SIGINT', this._sigintHandler)
+            this._sigintHandler = null
+        }
+        if (this._sigtermHandler) {
+            process.removeListener('SIGTERM', this._sigtermHandler)
+            this._sigtermHandler = null
+        }
+        if (this._exitHandler) {
+            process.removeListener('exit', this._exitHandler)
+            this._exitHandler = null
+        }
+
         if (this.process && !this.process.killed) {
             try {
                 if (this.detached) {
