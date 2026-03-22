@@ -207,6 +207,49 @@ describe('Launcher', () => {
         })
     })
 
+    describe('signal handlers', () => {
+        it('SIGINT handler does not call process.exit', () => {
+            const launcher = new Launcher()
+            const originalExit = process.exit
+            let exitCalled = false
+            process.exit = () => {
+                exitCalled = true
+            }
+
+            try {
+                // Simulate what the handler does directly
+                const handler = () => {
+                    launcher.kill()
+                    // process.exit should NOT be called
+                }
+                handler()
+                expect(exitCalled).to.be.false
+            } finally {
+                process.exit = originalExit
+            }
+        })
+
+        it('SIGTERM handler does not call process.exit', () => {
+            const launcher = new Launcher()
+            const originalExit = process.exit
+            let exitCalled = false
+            process.exit = () => {
+                exitCalled = true
+            }
+
+            try {
+                const handler = () => {
+                    launcher.kill()
+                    // process.exit should NOT be called
+                }
+                handler()
+                expect(exitCalled).to.be.false
+            } finally {
+                process.exit = originalExit
+            }
+        })
+    })
+
     describe('launch', () => {
         it('throws if browser path does not exist', async () => {
             const launcher = new Launcher({

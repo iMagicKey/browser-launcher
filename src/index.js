@@ -1,6 +1,6 @@
-import { spawn } from 'child_process'
-import fs from 'fs'
-import * as net from 'net'
+import { spawn } from 'node:child_process'
+import fs from 'node:fs'
+import * as net from 'node:net'
 import getRandomPort from './modules/getRandomPort.js'
 
 export default class Launcher {
@@ -104,11 +104,9 @@ export default class Launcher {
 
             this._sigintHandler = () => {
                 this.kill()
-                process.exit()
             }
             this._sigtermHandler = () => {
                 this.kill()
-                process.exit()
             }
             this._exitHandler = () => this.kill()
 
