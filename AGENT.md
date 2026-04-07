@@ -151,3 +151,14 @@ if (!ready) {
 - `getFlags()` will use `this.port` which may be `null` before `launch()` is called if no port was configured
 - `launchTimeout` controls only the wait for TCP readiness, not the overall process startup time
 - `isDebuggerReady()` uses a 2-second hardcoded socket timeout independent of `launchTimeout`
+
+---
+
+## Knowledge Base
+
+**KB tags for this library:** `imagic-browser-launcher, testing`
+
+Before COMPLEX tasks — invoke `knowledge-reader` with tags above + task-specific tags.
+After completing a task — if a reusable pattern, error, or decision emerged, invoke `knowledge-writer` with `source: imagic-browser-launcher`.
+
+See `CLAUDE.md` §Knowledge Base Protocol for the full workflow.

@@ -1,53 +1,53 @@
 {
-  "name": "imagic-browser-launcher",
-  "version": "1.0.3",
-  "description": "Launch and control Chromium browser instances",
-  "type": "module",
-  "exports": {
-    ".": "./src/index.js",
-    "./package.json": "./package.json"
-  },
-  "files": [
-    "src",
-    "README.md",
-    "LICENSE"
-  ],
-  "sideEffects": false,
-  "scripts": {
-    "test": "node --test ./tests/**/*.test.js",
-    "lint": "eslint src",
-    "lint:fix": "eslint src --fix"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/iMagicKey/browser-launcher.git"
-  },
-  "keywords": [
-    "imagic",
-    "browser",
-    "launch",
-    "chromium",
-    "browser-launcher"
-  ],
-  "author": "iMagicKey",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/iMagicKey/browser-launcher/issues"
-  },
-  "homepage": "https://github.com/iMagicKey/browser-launcher#readme",
-  "engines": {
-    "node": ">=24"
-  },
-  "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "chai": "latest",
-    "eslint": "^10.1.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-n": "^17.24.0",
-    "eslint-plugin-prettier": "^5.5.5",
-    "eslint-plugin-promise": "^7.2.1",
-    "globals": "^17.3.0",
-    "prettier": "^3.8.1"
-  }
+    "name": "imagic-browser-launcher",
+    "version": "1.0.3",
+    "description": "Launch and control Chromium browser instances",
+    "type": "module",
+    "exports": {
+        ".": "./src/index.js",
+        "./package.json": "./package.json"
+    },
+    "files": [
+        "src",
+        "README.md",
+        "LICENSE"
+    ],
+    "sideEffects": false,
+    "scripts": {
+        "test": "node --test ./tests/**/*.test.js",
+        "lint": "eslint src tests",
+        "lint:fix": "eslint src tests --fix",
+        "prettier": "npx prettier --write ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/iMagicKey/browser-launcher.git"
+    },
+    "keywords": [
+        "imagic",
+        "browser",
+        "launch",
+        "chromium",
+        "browser-launcher"
+    ],
+    "author": "iMagicKey",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/iMagicKey/browser-launcher/issues"
+    },
+    "homepage": "https://github.com/iMagicKey/browser-launcher#readme",
+    "engines": {
+        "node": ">=24"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.24.0",
+        "chai": "latest",
+        "eslint": "^9.24.0",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-import": "^2.32.0",
+        "eslint-plugin-n": "^17.24.0",
+        "eslint-plugin-promise": "^7.2.1",
+        "globals": "^16.0.0",
+        "prettier": "^3.8.1"
+    }
 }

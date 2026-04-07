@@ -167,7 +167,14 @@ export default class Launcher {
 
     isDebuggerReady() {
         return new Promise((resolve) => {
-            const cleanup = () => {
+            const timeout = setTimeout(() => {
+                cleanup()
+                resolve(false)
+            }, 2000)
+
+            const client = net.createConnection(this.port, '127.0.0.1')
+
+            function cleanup() {
                 clearTimeout(timeout)
                 try {
                     client.removeAllListeners()
@@ -179,12 +186,6 @@ export default class Launcher {
                     // Ignore cleanup errors
                 }
             }
-            const timeout = setTimeout(() => {
-                cleanup()
-                resolve(false)
-            }, 2000)
-
-            const client = net.createConnection(this.port, '127.0.0.1')
 
             client.once('error', (error) => {
                 this.log(`[Launcher] Debugger connection error: ${error.message}`)
